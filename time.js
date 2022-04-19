@@ -6,7 +6,7 @@ function Time() {
   // Get current minute
   var minute = date.getMinutes();
   // Get current second
-  var second = date.getSeconds();
+  // var second = date.getSeconds();
   // Variable to store AM / PM
   var period = "";
   // Assigning AM / PM according to the current hour
@@ -27,9 +27,9 @@ function Time() {
   // if they are less than 10
   hour = update(hour);
   minute = update(minute);
-  second = update(second);
+  // second = update(second);
   // Adding time elements to the div
-  document.getElementById("digital-clock").innerText = hour + " : " + minute + " : " + second + " " + period;
+  document.getElementById("digital-clock").innerText = hour + " : " + minute + " " + period;
   // Set Timer to 1 sec (1000 ms)
   setTimeout(Time, 1000);
 }

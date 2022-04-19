@@ -1,12 +1,20 @@
+/* Google font */
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
 body {
   background-color: black;
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* https://stackoverflow.com/questions/1575141/how-to-make-a-div-100-height-of-the-browser-window */
+  height: 100vh;
 }
 
 #digital-clock {
   color: red;
-  width: 100%;
-  margin-top: 30%;
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 100px;
-  text-align: center;
+  /* Its font family is chosen as _Orbitron_because it gives the look of a real digital clock */
+  font-family: 'Orbitron', sans-serif;
+  /* https://stackoverflow.com/questions/16056591/font-scaling-based-on-width-of-container */
+  font-size: 15vw;
 }
