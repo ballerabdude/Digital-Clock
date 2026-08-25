@@ -43,3 +43,37 @@ function update(t) {
   }
 }
 Time();
+
+// Fetches the current gold price (XAU/USD per troy ounce)
+// from the free gold-api.com API and displays it under the clock
+function GoldPrice() {
+  fetch("https://api.gold-api.com/price/XAU")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // Format the price with a thousands separator and 2 decimals
+      var price = data.price.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      document.getElementById("gold-price").innerText = "Gold 24K: $" + price + " / oz";
+      // 21K = 21/24 pure gold, 1 troy ounce = 31.1035 grams
+      var price21kPerGram = data.price * (21 / 24) / 31.1035;
+      var price21k = price21kPerGram.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      document.getElementById("gold-price-21k").innerText = "Gold 21K: $" + price21k + " / g";
+    })
+    .catch(function () {
+      // Only show an error if no price has been displayed yet
+      var element = document.getElementById("gold-price");
+      if (element.innerText.trim() === "") {
+        element.innerText = "Gold: unavailable";
+      }
+    });
+  // Refresh the price every 1 minute (60000 ms)
+  setTimeout(GoldPrice, 60000);
+}
+GoldPrice();
