@@ -76,4 +76,56 @@ function GoldPrice() {
   // Refresh the price every 1 minute (60000 ms)
   setTimeout(GoldPrice, 60000);
 }
-GoldPrice();
+
+// Shows or hides the gold price lines, starting the
+// price updater the first time they are enabled
+var goldStarted = false;
+function setGoldVisible(visible) {
+  document.getElementById("gold-price").classList.toggle("hidden", !visible);
+  document.getElementById("gold-price-21k").classList.toggle("hidden", !visible);
+  if (visible && !goldStarted) {
+    goldStarted = true;
+    GoldPrice();
+  }
+}
+
+// A long press (500 ms) anywhere on the page toggles the options menu.
+// The choice is remembered in localStorage for the next visit.
+var LONG_PRESS_MS = 500;
+var pressTimer = null;
+
+function startPress() {
+  pressTimer = setTimeout(function () {
+    pressTimer = null;
+    document.getElementById("options-menu").classList.toggle("hidden");
+  }, LONG_PRESS_MS);
+}
+
+function cancelPress() {
+  if (pressTimer) {
+    clearTimeout(pressTimer);
+    pressTimer = null;
+  }
+}
+
+document.addEventListener("mousedown", startPress);
+document.addEventListener("mouseup", cancelPress);
+document.addEventListener("mouseleave", cancelPress);
+document.addEventListener("touchstart", startPress);
+document.addEventListener("touchend", cancelPress);
+document.addEventListener("touchcancel", cancelPress);
+// Prevent the right-click menu so a long press stays clean
+document.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+});
+
+document.getElementById("toggle-gold").addEventListener("change", function (event) {
+  var enabled = event.target.checked;
+  setGoldVisible(enabled);
+  localStorage.setItem("showGold", enabled ? "1" : "0");
+});
+
+// Restore the saved preference on load (default: gold hidden)
+var showGold = localStorage.getItem("showGold") === "1";
+document.getElementById("toggle-gold").checked = showGold;
+setGoldVisible(showGold);

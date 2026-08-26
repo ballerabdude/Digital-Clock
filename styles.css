@@ -10,6 +10,11 @@ body {
   justify-content: center;
   /* https://stackoverflow.com/questions/1575141/how-to-make-a-div-100-height-of-the-browser-window */
   height: 100vh;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 #digital-clock {
@@ -26,4 +31,33 @@ body {
   font-family: 'Orbitron', sans-serif;
   font-size: 5vw;
   margin: 0;
+}
+
+#options-menu {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1a1a1a;
+  border: 1px solid red;
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  color: red;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4vw;
+  user-select: none;
+}
+
+#options-menu label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
+#options-menu input[type="checkbox"] {
+  width: 1em;
+  height: 1em;
+  accent-color: red;
+  cursor: pointer;
 }

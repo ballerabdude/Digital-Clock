@@ -9,8 +9,15 @@
 
 <body>
   <p id="digital-clock"> </p>
-  <p id="gold-price"> </p>
-  <p id="gold-price-21k"> </p>
+  <p id="gold-price" class="hidden"> </p>
+  <p id="gold-price-21k" class="hidden"> </p>
+
+  <div id="options-menu" class="hidden">
+    <label>
+      <input type="checkbox" id="toggle-gold">
+      Show gold price
+    </label>
+  </div>
 
   <script src="time.js" charset="utf-8"></script>
 
